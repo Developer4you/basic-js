@@ -23,7 +23,22 @@ import { NotImplementedError } from '../extensions/index.js';
  *  [1, 1, 1]
  * ]
  */
-export default function minesweeper (/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+export default function minesweeper (matrix) {
+  let n=0;
+  let resArr=matrix.map(el => [].concat(el));
+for (let i=0; i<matrix.length; i++)
+  for (let j=0; j<matrix[i].length; j++) {
+    if (i>0 && j>0 && (matrix[i-1][j-1]===true)) n++
+    if (i>0 && (matrix[i-1][j]===true)) n++
+    if (i>0 && j<matrix[i].length-1 && (matrix[i-1][j+1]===true)) n++
+    if (j>0 && (matrix[i][j-1]===true)) n++
+    if (j<matrix[i].length-1 && (matrix[i][j+1]===true)) n++
+    if (i<matrix.length-1 && j>0 && (matrix[i+1][j-1]===true)) n++
+    if (i<matrix.length-1 && (matrix[i+1][j]===true)) n++
+    if (i<matrix.length-1 && j<matrix[i].length-1 && (matrix[i+1][j+1]===true)) n++
+    
+  resArr[i][j]=n;
+  n=0;
+  }
+return resArr
 }
